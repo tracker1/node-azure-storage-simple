@@ -1,0 +1,58 @@
+{
+  "name": "node-azure-storage-simple",
+  "version": "0.0.0",
+  "description": "Simplified Interfaces for Azure Storage Services (Tables, Queues, Blob)",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tracker1/node-azure-storage-simple.git"
+  },
+  "keywords": [
+    "azure",
+    "blob",
+    "table",
+    "queue",
+    "promise"
+  ],
+  "author": "Michael J. Ryan <tracker1@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tracker1/node-azure-storage-simple/issues"
+  },
+  "homepage": "https://github.com/tracker1/node-azure-storage-simple#readme",
+  "config": {
+    "MOCHA_OPTS": "--recursive spec/",
+    "ISPARTA_OPTS": "--report html",
+    "COVERAGE_OPTS": "--statements 100 --functions 100 --branches 100 --lines 100"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build": "babel ./src --experimental --source-maps-inline -d ./dist",
+    "lint": "npm run lint-src && npm run lint-test",
+    "lint-src": "eslint src",
+    "lint-test": "eslint spec --global describe,it,beforeEach,afterEach --rule no-unused-expressions:false ",
+    "unit": "babel-node -r node_modules/.bin/_mocha $npm_package_config_MOCHA_OPTS",
+    "coverage": "babel-node -r node_modules/.bin/isparta cover $npm_package_config_ISPARTA_OPTS node_modules/.bin/_mocha -- $npm_package_config_MOCHA_OPTS",
+    "coverage-check": "node node_modules/isparta/node_modules/istanbul/lib/cli check-coverage $npm_package_config_COVERAGE_OPTS",
+    "show-report": "node scripts/open-coverage-report",
+    "test": "npm run lint && npm run coverage && (npm run coverage-check || node scripts/open-coverage-report)",
+    "publish-major": "npm run build && npm version major && npm publish && git push origin master && git push --tags",
+    "publish-minor": "npm run build && npm version minor && npm publish && git push origin master && git push --tags",
+    "publish-patch": "npm run build && npm version patch && npm publish && git push origin master && git push --tags"
+  },
+  "devDependencies": {
+    "eslint": "^0.18.0",
+    "babel": "^4.7.12",
+    "chai": "^2.1.1",
+    "isparta": "^2.2.0",
+    "mocha": "^2.2.1",
+    "open": "0.0.5",
+    "proxyquire": "^1.4.0",
+    "sinon": "^1.13.0",
+    "sinon-chai": "^2.7.0"
+  },
+  "dependencies": {
+    "azure-storage": "^0.4.3",
+    "safe-clone-deep": "^1.0.5"
+  }
+}
