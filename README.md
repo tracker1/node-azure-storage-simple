@@ -115,9 +115,9 @@ while (records.next) {
   records = await records.next();
 
   records
-    .map((record)=>record.value) //unwrap value
-    .forEach((record /*unwrapped*/)=>{
+    .forEach((record /*wrapped*/)=>{
       //do something with unwrapped value
+      //can access original response with record.__proto__
     });
 }
   
