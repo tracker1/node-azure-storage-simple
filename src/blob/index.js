@@ -1,3 +1,3 @@
-module.export = function createBlobWrapper(store,key,name) {
+module.exports = function createBlobWrapper(store,key,name) {
   return {}; //nothing yet
 };

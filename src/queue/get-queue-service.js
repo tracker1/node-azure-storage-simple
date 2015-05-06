@@ -8,7 +8,7 @@ function getQueueService(store,key,name) {
   return new Promise(function(resolve,reject){
     try {
       //key for caching service instances
-      var svcCacheKey = `${store}/${key}`;
+      var svcCacheKey = [store,key].join('/');
 
       //instance of azure queue service
       var svc = svcCache[svcCacheKey];
