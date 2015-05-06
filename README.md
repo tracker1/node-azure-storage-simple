@@ -58,7 +58,9 @@ For details on how to use these services see:
 A dramatically simplified interface for using Azure Storage Queues.
 
 ```js
-var q = await service.queue('myQueueName'); //calls createQueueIfNotExist under the covers (once)
+var q = service.queue('myQueueName');
+
+//child methods will call createQueueIfNotExist under the covers (once)
 
 await queue.add(value);
 
@@ -82,7 +84,9 @@ A simplified interface will be used to access table storage.  You won't need to 
 Note: write will do an insertOrMerge, so if you intend to remove field values, set them to null.
 
 ```js
-var tbl = await storage.table('myTableName'); //calls createTableIfNotExist under the covers (once)
+var tbl = storage.table('myTableName');
+
+// child methods call createTableIfNotExist under the covers (once)
 
 var value = {
   'someString': 'value',
