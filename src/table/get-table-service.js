@@ -5,7 +5,6 @@ var nameChecked = {};
 module.exports = getTableService;
 
 function getTableService(store,key,name) {
-  console.log(store,key,name);
   
   return new Promise(function(resolve,reject){
     try {

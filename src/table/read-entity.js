@@ -53,6 +53,7 @@ function parseValue(val) {
 
   try {
     val = val.trim();
+    val = jsonDateHydration('',val);
 
     //looks like a supported JSON literal value, parse it
     if ((/^(true|false|null|\d+|\d+\.\d+)$/i).test(val)) return JSON.parse(val.toLowerCase()); 
@@ -71,7 +72,9 @@ function parseValue(val) {
 }
 
 
-function jsonDateHydration(val) {
+function jsonDateHydration(key,val) {
+  console.log('hydrate',val);
+
   //not a string, nothing to do
   if (typeof val !== 'string') return val;
 
