@@ -171,6 +171,3 @@ var myObj = JSON.parse(myBuffer.toString()); //decode stored json above..
 await blob.delete('some/path/file.ext');
 ```
 
-**TODO**
-
-For now use `storage.createBlobService()`
