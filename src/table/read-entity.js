@@ -73,7 +73,6 @@ function parseValue(val) {
 
 
 function jsonDateHydration(key,val) {
-  console.log('hydrate',val);
 
   //not a string, nothing to do
   if (typeof val !== 'string') return val;
