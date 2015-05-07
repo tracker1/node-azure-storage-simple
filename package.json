@@ -2,7 +2,7 @@
   "name": "azure-storage-simple",
   "version": "0.2.3",
   "description": "Simplified Interfaces for Azure Storage Services (Tables, Queues, Blob)",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tracker1/node-azure-storage-simple.git"
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "babel ./src --experimental --source-maps-inline -d ./dist",
+    "build": "babel ./src --stage 0 --source-maps-inline --optional runtime -d ./dist",
     "lint": "npm run lint-src && npm run lint-test",
     "lint-src": "eslint src",
     "lint-test": "eslint spec --global describe,it,beforeEach,afterEach --rule no-unused-expressions:false ",
@@ -36,13 +36,13 @@
     "coverage-check": "node node_modules/isparta/node_modules/istanbul/lib/cli check-coverage $npm_package_config_COVERAGE_OPTS",
     "show-report": "node scripts/open-coverage-report",
     "test": "npm run lint && npm run coverage && (npm run coverage-check || node scripts/open-coverage-report)",
-    "publish-major": "npm version major && npm publish && git push origin master && git push --tags",
-    "publish-minor": "npm version minor && npm publish && git push origin master && git push --tags",
-    "publish-patch": "npm version patch && npm publish && git push origin master && git push --tags"
+    "publish-major": "npm run clean && npm run build && npm version major && npm publish && git push origin master && git push --tags",
+    "publish-minor": "npm run clean && npm run build && npm version minor && npm publish && git push origin master && git push --tags",
+    "publish-patch": "npm run clean && npm run build && npm version patch && npm publish && git push origin master && git push --tags"
   },
   "devDependencies": {
     "eslint": "^0.18.0",
-    "babel": "^4.7.12",
+    "babel": "^5.2.16",
     "chai": "^2.1.1",
     "isparta": "^2.2.0",
     "mocha": "^2.2.1",
@@ -53,6 +53,9 @@
   },
   "dependencies": {
     "azure-storage": "^0.4.3",
+    "babel-runtime": "^5.2.16",
+    "i-promise": "^1.1.0",
+    "repromise": "^3.2.0",
     "safe-clone-deep": "^1.0.5"
   }
 }

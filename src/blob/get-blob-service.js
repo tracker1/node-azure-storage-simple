@@ -1,13 +1,15 @@
-var azure = require('azure-storage');
+import azure from 'azure-storage';
+import repromise from 'repromise';
 var svcCache = {};
 var nameChecked = {};
 
-module.exports = getTableService;
+export { getBlobService as default };
+export default function getBlobService(...params) {
+  return repromise(()=>getBlobServicePromise(...params));
+}
 
-function getTableService(store,key,name) {
-  console.log(store,key,name);
-  
-  return new Promise(function(resolve,reject){
+function getBlobServicePromise(store,key,name,options) {
+  return new Promise((resolve,reject)=>{
     try {
       //key for caching service instances
       var svcCacheKey = [store,key].join('/');
@@ -15,18 +17,22 @@ function getTableService(store,key,name) {
       //instance of azure queue service
       var svc = svcCache[svcCacheKey];
       if (!svc) {
-        svc = svcCache[svcCacheKey] = azure.createTableService(store,key);
+        svc = svcCache[svcCacheKey] = azure.createBlobService(store,key);
       }
 
       //the queue name has already been checked.
       if (nameChecked[name]) return resolve(svc);
 
       //check the queue name
-      svc.createTableIfNotExists(name, function(err,result,response){
+      svc.createContainerIfNotExists(name, options, (err,result,response)=>{
         if (err) {
+          delete svcCache[svcCacheKey];
+          delete nameChecked[name];
+
           err.detail = {response:response};
           return reject(err);
         }
+        
         nameChecked[name] = true; //checked
         return resolve(svc);
       });

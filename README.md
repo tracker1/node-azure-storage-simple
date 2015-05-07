@@ -129,6 +129,48 @@ while (records.next) {
 
 ## Blob Storage
 
+Allows for simple read-write access to block blobs.
+
+```js
+// blob(containerName, containerOptions)
+// child methods will call createContainerIfNotExists one time.
+var blob = storage.blob('my-container', {publicAccessLevel : 'blob'});
+
+
+// ### write(path,[options],data) ###
+
+// text/plain, charset=UTF-8
+var result = await blob.write('some/path/file.txt', 'this is a string');
+
+// application/json
+var result = await blob.write('some/path/file.json', {foo:'bar'});
+
+// application/octet-stream (default)
+var result = await blob.write('some/path/file.bin', someBuffer);
+
+// options for createBlockBlobFromStream
+var result = await blob.write(
+  'some/path/image.png'
+  ,{
+    contentType: 'image/png'
+    //,contentEncoding: 'gzip' // specify encoding if you 'gzip' or 'deflate' your content
+  }
+  ,imageBuffer
+);
+
+
+// ### read(path,[options]) => Buffer ###
+var myBuffer = await blob.read('some/path/file.txt');
+var myText = myBuffer.toString(); //decode from utf8 / default
+...
+var myBuffer = await blob.read('some/path/file.json');
+var myObj = JSON.parse(myBuffer.toString()); //decode stored json above..
+
+
+// ### delete(path,[options])
+await blob.delete('some/path/file.ext');
+```
+
 **TODO**
 
 For now use `storage.createBlobService()`
