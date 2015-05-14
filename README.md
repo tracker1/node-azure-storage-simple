@@ -124,6 +124,9 @@ while (records.next) {
       //can access original response with record.__proto__
     });
 }
+
+//delete an entry from table storage
+await tbl.delete('partitionKey','rowKey');
   
 ```
 
