@@ -1,6 +1,6 @@
 {
   "name": "azure-storage-simple",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "Simplified Interfaces for Azure Storage Services (Tables, Queues, Blob)",
   "main": "src/index.js",
   "repository": {
