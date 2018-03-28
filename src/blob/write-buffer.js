@@ -18,7 +18,7 @@ function writeBufferPromise(svc,containerName,path,options,data) {
   if (typeof data === 'undefined' || data === null) return Promise.reject(new Error('No data specified'));
 
   try {
-    if (typeof data === 'string') return safeText()
+    if (typeof data === 'string') return saveText()
     if (!(data instanceof Buffer)) return saveJson();
     return saveBinary();
   } catch(err) {
