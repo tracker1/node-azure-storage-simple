@@ -1,6 +1,6 @@
 import repromise from 'repromise';
 import toStream from '../convert/to-stream';
-import clone from 'safe-clone-deep';
+import clone from 'fclone';
 import zlib from 'zlib';
 
 export default function writeBuffer(...params){

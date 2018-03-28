@@ -2,7 +2,7 @@
 
 Simplified interfaces for Azure Storage (Tables, Queues, Blob)
 
-This is an opinionated interface using Promises.  You can use the promises interface's `.then` and `.catch` methods, or you can use ES7-style `await` syntax via [BabelJS](http://babeljs.io/) stage 0 support, or something similar.  A global `Promise` implementation is required, and must be set globally, no searches will be done.
+This is an opinionated interface using Promises.  You can use ES7-style `await` syntax, or the underlying Promise interface directly.
 
 
 ## Install
@@ -173,4 +173,3 @@ var myObj = JSON.parse(myBuffer.toString()); //decode stored json above..
 // ### delete(path,[options])
 await blob.delete('some/path/file.ext');
 ```
-

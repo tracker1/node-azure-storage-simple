@@ -1,5 +1,5 @@
 var getQueueService = require('./get-queue-service');
-var clone = require('safe-clone-deep');
+var clone = require('fclone');
 
 module.exports = addOne;
 

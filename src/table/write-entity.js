@@ -1,4 +1,4 @@
-var clone = require('safe-clone-deep')
+var clone = require('fclone')
 var getTableService = require('./get-table-service');
 
 module.exports = writeEntity;
